@@ -3,8 +3,6 @@ package core.basesyntax;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SalaryInfo {
 
@@ -17,7 +15,7 @@ public class SalaryInfo {
         DateTimeFormatter formatter = FORMATTER;
         LocalDate from = LocalDate.parse(dateFrom, formatter);
         LocalDate to = LocalDate.parse(dateTo, formatter);
-        Map<String, Integer> totals = new HashMap<>();
+        int[] totals = new int[names.length];
         for (String record : data) {
             String[] values = record.split("\\s");
             LocalDate date = LocalDate.parse(values[DATE_INDEX], formatter);
@@ -31,17 +29,18 @@ public class SalaryInfo {
             int hours = Integer.parseInt(values[HOURS_INDEX]);
             int salary = Integer.parseInt(values[SALARY_INDEX]);
             int total = hours * salary;
-            if (totals.containsKey(name)) {
-                total += totals.get(name);
+            int index = Arrays.asList(names).indexOf(name);
+            if (index >= 0) {
+                total += totals[index];
             }
-            totals.put(name, total);
+            totals[index] = total;
         }
         StringBuilder builder = new StringBuilder("Report for period ");
         builder.append(dateFrom).append(" - ").append(dateTo);
         for (String name : names) {
-            Integer total = totals.get(name);
+            int index = Arrays.asList(names).indexOf(name);
             builder.append(System.lineSeparator()).append(name)
-                    .append(" - ").append(total == null ? 0 : total);
+                    .append(" - ").append(index < 0 ? 0 : totals[index]);
         }
         return builder.toString();
     }
