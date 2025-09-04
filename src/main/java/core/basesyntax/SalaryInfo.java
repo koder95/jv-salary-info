@@ -41,7 +41,7 @@ public class SalaryInfo {
         for (String name : names) {
             Integer total = totals.get(name);
             builder.append(System.lineSeparator()).append(name)
-                    .append(" - ").append(total == null? 0 : total);
+                    .append(" - ").append(total == null ? 0 : total);
         }
         return builder.toString();
     }
