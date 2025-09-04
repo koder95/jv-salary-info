@@ -39,8 +39,9 @@ public class SalaryInfo {
         StringBuilder builder = new StringBuilder("Report for period ");
         builder.append(dateFrom).append(" - ").append(dateTo);
         for (String name : names) {
-            int total = totals.get(name);
-            builder.append(System.lineSeparator()).append(name).append(" - ").append(total);
+            Integer total = totals.get(name);
+            builder.append(System.lineSeparator()).append(name)
+                    .append(" - ").append(total == null? 0 : total);
         }
         return builder.toString();
     }
