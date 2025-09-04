@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class SalaryInfo {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofLocalizedPattern("dd.MM.yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public String getSalaryInfo(String[] names, String[] data, String dateFrom, String dateTo) {
         DateTimeFormatter formatter = FORMATTER;
